@@ -63,7 +63,7 @@ const BoardsNew = () => {
   };
 
   return (
-    <div className='App'>
+    <div className='wrapper'>
       <div className='app-register'>
         <form className='register-form'>
           <legend className='form-title'>게시물 등록</legend>
