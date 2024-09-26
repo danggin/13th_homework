@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import BoardsNew from './routes/boards/new/BoardsNew';
-import BoardsDetail from './routes/boards/new/BoardsDetail';
+import BoardsDetail from './routes/boards/detail/BoardsDetail';
 
 const pages = createBrowserRouter([
   { path: '/', element: <App /> },
