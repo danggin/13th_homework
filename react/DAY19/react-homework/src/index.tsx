@@ -1,10 +1,10 @@
-import React from 'react';
+
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import BoardsNew from './routes/boards/new/BoardsNew';
-import BoardsDetail from './routes/boards/new/BoardsDetail';
+import BoardsDetail from './routes/boards/detail/BoardsDetail';
 
 const pages = createBrowserRouter([
   { path: '/', element: <App /> },
@@ -12,5 +12,5 @@ const pages = createBrowserRouter([
   { path: '/boards/detail', element: <BoardsDetail /> },
 ]);
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById('root') as ReactDOM.Container);
 root.render(<RouterProvider router={pages} />);

@@ -1,6 +1,6 @@
-import '../../../App.css';
+import './BoardsNew.css';
 import iconPlus from '../../../assets/icon_plus.svg';
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 
 const BoardsNew = () => {
   const [writer, setWriter] = useState('');
@@ -14,28 +14,28 @@ const BoardsNew = () => {
   const [errorTitle, setErrorTitle] = useState('');
   const [errorContent, setErrorContent] = useState('');
 
-  const onChangeWriter = (event) => {
+  const onChangeWriter = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     setWriter(value);
 
     if (event.target.value && password && title && content) return setIsActive(true);
     setIsActive(false);
   };
-  const onChangePassword = (event) => {
+  const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     setPassword(value);
 
     if (writer && event.target.value && title && content) return setIsActive(true);
     setIsActive(false);
   };
-  const onChangeTitle = (event) => {
+  const onChangeTitle = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     setTitle(value);
 
     if (writer && password && event.target.value && content) return setIsActive(true);
     setIsActive(false);
   };
-  const onChangeContent = (event) => {
+  const onChangeContent = (event: ChangeEvent<HTMLTextAreaElement>) => {
     const value = event.target.value;
     setContent(value);
 
@@ -43,10 +43,9 @@ const BoardsNew = () => {
     setIsActive(false);
   };
 
-  const onClickRegister = (event) => {
-    event.preventDefault();
+  const onClickRegister = () => {
 
-    const isValid = writer.trim(' ') === '' || password.trim(' ') === '' || title.trim(' ') === '' || content.trim(' ') === '';
+    const isValid = writer.trim() === '' || password.trim() === '' || title.trim() === '' || content.trim() === '';
 
     !writer ? setErrorWriter('필수입력 사항입니다.') : setErrorWriter('');
     !password ? setErrorPassword('필수입력 사항입니다.') : setErrorPassword('');
@@ -63,7 +62,7 @@ const BoardsNew = () => {
   };
 
   return (
-    <div className='App'>
+    <div className='app'>
       <div className='app-register'>
         <form className='register-form'>
           <legend className='form-title'>게시물 등록</legend>
@@ -71,7 +70,7 @@ const BoardsNew = () => {
             <div className='required flex col gap-8'>
               <label htmlFor='post-writer-input'>작성자</label>
               <input type='text' id='post-writer-input' onChange={(event) => onChangeWriter(event)} placeholder='작성자 명을 입력해 주세요.' />
-              <p className='error-messge'>{errorWriter}</p>
+              <p className='error-message'>{errorWriter}</p>
             </div>
 
             <div className='required flex col gap-8'>
@@ -126,13 +125,13 @@ const BoardsNew = () => {
             <button type='button' className='button-common button-border-type'>
               취소
             </button>
-            <button onClick={(event) => onClickRegister(event)} className={`button-common button-fill-type ${isActive ? 'bg-blue' : 'bg-gray disabled'}`}>
+            <button onClick={onClickRegister} className={`button-common button-fill-type ${isActive ? 'bg-blue' : 'bg-gray disabled'}`}>
               등록하기
             </button>
           </div>
         </form>
       </div>
-    </div>
+      </div>
   );
 };
 
