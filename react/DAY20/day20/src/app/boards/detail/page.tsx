@@ -1,39 +1,41 @@
-import './BoardsDetail.css'
-import writerImage from '../../../assets/icon_user.svg'
-import fileAttached from '../../../assets/icon_file.svg'
-import addressEntered from '../../../assets/icon_location.svg'
-import detailImage from '../../../assets/image_detail.png'
-import thumbnailYoutube from '../../../assets/thumbnail_video.png'
-import iconDislike from '../../../assets/icon_dislike.svg'
-import iconLike from '../../../assets/icon_like.svg'
-import iconToList from '../../../assets/icon_list.svg'
-import iconEdit from '../../../assets/icon_edit.svg'
+'use client'
+
+import styles from './styles.module.css'
+import Image from 'next/image'
+import writerImage from '@/assets/icon_user.svg'
+import fileAttached from '@/assets/icon_file.svg'
+import addressEntered from '@/assets/icon_location.svg'
+import detailImage from '@/assets/image_detail.png'
+import thumbnailYoutube from '@/assets/thumbnail_video.png'
+import iconDislike from '@/assets/icon_dislike.svg'
+import iconLike from '@/assets/icon_like.svg'
+import iconToList from '@/assets/icon_list.svg'
+import iconEdit from '@/assets/icon_edit.svg'
 
 
 const BoardsDetail = () => {
   return (
-    <div className='app'>
-      <div className='app-detail'>
+      <div className={styles.appDetail}>
         <div className='detail-header border-b'>
           <h2>제목제목제목제목제목제목제목제 목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목</h2>
           <div className='detail-header-info flex'>
             <div className='info-writer flex align-center'>
-              <div className='writer-image'>
-                <img src={writerImage} alt='작성자 프로필 이미지' />
+              <div className={styles.WriterImage}>
+                <Image src={writerImage} alt='작성자 프로필 이미지'  width={0} height={0} sizes="100vw"/>
               </div>
-              <span className='writer-name'>홍길동</span>
+              <span className={styles.writerName}>홍길동</span>
             </div>
-            <div className='info-date'>2024.11.11</div>
+            <div className={styles.infoDate}>2024.11.11</div>
           </div>
         </div>
-        <section className='detail-content'>
+        <section className={styles.detailContent}>
           <div className='content-info flex justify-end gap-8'>
-            <img src={fileAttached} alt='파일 첨부됨' />
-            <img src={addressEntered} alt='주소 입력됨' />
+            <Image src={fileAttached} alt='파일 첨부됨'  width={0} height={0} sizes="100vw" />
+            <Image src={addressEntered} alt='주소 입력됨'  width={0} height={0} sizes="100vw" />
           </div>
-          <div className='contents'>
-            <img src={detailImage} alt='게시물 이미지' className='contents-cover' />
-            <p className='contents-text'>
+          <div className={styles.contents}>
+            <Image src={detailImage} alt='게시물 이미지' className='contents-cover' width={0} height={0} sizes="100vw" />
+            <p className={styles.contentsText}>
               살겠노라 살겠노라. 청산에 살겠노라. 
               머루랑 다래를 먹고 청산에 살겠노라. 
               얄리얄리 얄랑셩 얄라리 얄라 우는구나 우는구나 새야. 
@@ -52,19 +54,19 @@ const BoardsDetail = () => {
               어찌 하리이까.
               얄리얄리 얄라셩 얄라리 얄라
             </p>
-            <div className='contents-video'>
-              <img src={thumbnailYoutube} alt='유튜브 썸네일' />
+            <div className={styles.contentsVideo}>
+              <Image src={thumbnailYoutube} alt='유튜브 썸네일' width={0} height={0} sizes="100vw" />
             </div>
             <div className='contents-action flex'>
               <div className='action-dislike flex col'>
-                <button type='button' className='button-dislike'>
-                  <img src={iconDislike} alt='싫어요 버튼' />
+                <button type='button'>
+                  <Image src={iconDislike} alt='싫어요 버튼'  width={0} height={0} sizes="100vw"/>
                 </button>
                 <span>24</span>
               </div>
               <div className='action-like flex col'>
-                <button type='button' className='button-like'>
-                  <img src={iconLike} alt='좋아요 버튼' />
+                <button type='button'>
+                  <Image src={iconLike} alt='좋아요 버튼'  width={0} height={0} sizes="100vw"/>
                 </button>
                 <span className='like-count'>12</span>
               </div>
@@ -73,16 +75,15 @@ const BoardsDetail = () => {
         </section>
         <div className='detail-buttons flex justify-center gap-24'>
           <button type='button' className='button-common button-border-type button-icon-type button-back'>
-            <img src={iconToList} alt='목록으로 가기 버튼 아이콘' />
+            <Image src={iconToList} alt='목록으로 가기 버튼 아이콘' width={0} height={0} sizes="100vw" />
             <span>목록으로</span>
           </button>
           <button type='button' className='button-common button-border-type button-icon-type button-edit'>
-            <img src={iconEdit} alt='수정하기 버튼 아이콘' />
+            <Image src={iconEdit} alt='수정하기 버튼 아이콘'  width={0} height={0} sizes="100vw"/>
             <span>수정하기</span>
           </button>
         </div>
       </div>
-    </div>
   );
 };
 

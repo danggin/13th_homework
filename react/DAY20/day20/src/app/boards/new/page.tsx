@@ -1,6 +1,9 @@
-import './BoardsNew.css';
-import iconPlus from '../../../assets/icon_plus.svg';
+'use client'
+import Image from 'next/image';
 import { ChangeEvent, useState } from 'react';
+
+import './styles.module.css';
+import iconPlus from '@/assets/icon_plus.svg';
 
 const BoardsNew = () => {
   const [writer, setWriter] = useState('');
@@ -62,7 +65,6 @@ const BoardsNew = () => {
   };
 
   return (
-    <div className='app'>
       <div className='app-register'>
         <form className='register-form'>
           <legend className='form-title'>게시물 등록</legend>
@@ -108,15 +110,15 @@ const BoardsNew = () => {
             <label>사진 첨부</label>
             <div className='flex gap-16'>
               <button type='button' className='flex col button-upload'>
-                <img src={iconPlus} alt='' />
+                <Image src={iconPlus} alt='' width={0} height={0} sizes="100vw" />
                 <span>클릭해서 사진 업로드</span>
               </button>
               <button type='button' className='flex col button-upload'>
-                <img src={iconPlus} alt='' />
+                <Image src={iconPlus} alt='' width={0} height={0} sizes="100vw" />
                 <span>클릭해서 사진 업로드</span>
               </button>
               <button type='button' className='flex col button-upload'>
-                <img src={iconPlus} alt='' />
+                <Image src={iconPlus} alt=''  width={0} height={0} sizes="100vw"/>
                 <span>클릭해서 사진 업로드</span>
               </button>
             </div>
@@ -130,7 +132,6 @@ const BoardsNew = () => {
             </button>
           </div>
         </form>
-      </div>
       </div>
   );
 };
