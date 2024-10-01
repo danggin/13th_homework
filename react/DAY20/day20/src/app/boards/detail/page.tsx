@@ -1,41 +1,42 @@
-'use client'
+"use client"
 
-import styles from './styles.module.css'
-import Image from 'next/image'
-import writerImage from '@/assets/icon_user.svg'
-import fileAttached from '@/assets/icon_file.svg'
-import addressEntered from '@/assets/icon_location.svg'
-import detailImage from '@/assets/image_detail.png'
-import thumbnailYoutube from '@/assets/thumbnail_video.png'
-import iconDislike from '@/assets/icon_dislike.svg'
-import iconLike from '@/assets/icon_like.svg'
-import iconToList from '@/assets/icon_list.svg'
-import iconEdit from '@/assets/icon_edit.svg'
+import styles from "./styles.module.css"
+import Image from "next/image"
+import writerImage from "@/assets/icon_user.svg"
+import fileAttached from "@/assets/icon_file.svg"
+import addressEntered from "@/assets/icon_location.svg"
+import detailImage from "@/assets/image_detail.png"
+import thumbnailYoutube from "@/assets/thumbnail_video.png"
+import iconDislike from "@/assets/icon_dislike.svg"
+import iconLike from "@/assets/icon_like.svg"
+import iconToList from "@/assets/icon_list.svg"
+import iconEdit from "@/assets/icon_edit.svg"
 
 
 const BoardsDetail = () => {
   return (
-      <div className={styles.appDetail}>
-        <div className='detail-header border-b'>
-          <h2>제목제목제목제목제목제목제목제 목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목</h2>
-          <div className='detail-header-info flex'>
-            <div className='info-writer flex align-center'>
-              <div className={styles.WriterImage}>
-                <Image src={writerImage} alt='작성자 프로필 이미지'  width={0} height={0} sizes="100vw"/>
+    <>
+      <div className={styles["app-detail"]}>
+        <div className={`${styles["detail-header"]} border-b`}> 
+          <h2>제목</h2>
+          <div className={`${styles["detail-header-info"]} flex`}>
+            <div className={`${styles["info-writer"]} flex align-center`}>
+              <div className={styles["writer-image"]}>
+                <Image src={writerImage} alt="작성자 프로필 이미지"  width={0} height={0} sizes="100vw"/>
               </div>
-              <span className={styles.writerName}>홍길동</span>
+              <span className={styles["writer-name"]}>홍길동</span>
             </div>
-            <div className={styles.infoDate}>2024.11.11</div>
+            <div className={styles["info-date"]}>2024.11.11</div>
           </div>
         </div>
-        <section className={styles.detailContent}>
-          <div className='content-info flex justify-end gap-8'>
-            <Image src={fileAttached} alt='파일 첨부됨'  width={0} height={0} sizes="100vw" />
-            <Image src={addressEntered} alt='주소 입력됨'  width={0} height={0} sizes="100vw" />
+        <section className={styles["detail-content"]}>
+          <div className={`${styles["content-info"]} flex justify-end gap-2`}>
+            <Image src={fileAttached} alt="파일 첨부됨"  width={0} height={0} sizes="100vw" />
+            <Image src={addressEntered} alt="주소 입력됨"  width={0} height={0} sizes="100vw" />
           </div>
           <div className={styles.contents}>
-            <Image src={detailImage} alt='게시물 이미지' className='contents-cover' width={0} height={0} sizes="100vw" />
-            <p className={styles.contentsText}>
+            <Image src={detailImage} alt="게시물 이미지" className={styles["contents-cover"]} width={0} height={0} sizes="100vw" />
+            <p className={styles["contents-text"]}>
               살겠노라 살겠노라. 청산에 살겠노라. 
               머루랑 다래를 먹고 청산에 살겠노라. 
               얄리얄리 얄랑셩 얄라리 얄라 우는구나 우는구나 새야. 
@@ -54,36 +55,37 @@ const BoardsDetail = () => {
               어찌 하리이까.
               얄리얄리 얄라셩 얄라리 얄라
             </p>
-            <div className={styles.contentsVideo}>
-              <Image src={thumbnailYoutube} alt='유튜브 썸네일' width={0} height={0} sizes="100vw" />
+            <div className={styles["contents-video"]}>
+              <Image src={thumbnailYoutube} alt="유튜브 썸네일" width={0} height={0} sizes="100vw" />
             </div>
-            <div className='contents-action flex'>
-              <div className='action-dislike flex col'>
-                <button type='button'>
-                  <Image src={iconDislike} alt='싫어요 버튼'  width={0} height={0} sizes="100vw"/>
+            <div className={`${styles["contents-action"]} flex`}>
+              <div className={`${styles["action-dislike"]} flex col`}>
+                <button type="button">
+                  <Image src={iconDislike} alt="싫어요 버튼"  width={0} height={0} sizes="100vw"/>
                 </button>
                 <span>24</span>
               </div>
-              <div className='action-like flex col'>
-                <button type='button'>
-                  <Image src={iconLike} alt='좋아요 버튼'  width={0} height={0} sizes="100vw"/>
+              <div className={`${styles["action-like"]} flex col`}>
+                <button type="button">
+                  <Image src={iconLike} alt="좋아요 버튼"  width={0} height={0} sizes="100vw"/>
                 </button>
-                <span className='like-count'>12</span>
+                <span className={styles["like-count"]}>12</span>
               </div>
             </div>
           </div>
         </section>
-        <div className='detail-buttons flex justify-center gap-24'>
-          <button type='button' className='button-common button-border-type button-icon-type button-back'>
-            <Image src={iconToList} alt='목록으로 가기 버튼 아이콘' width={0} height={0} sizes="100vw" />
+        <div className={`${styles["detail-buttons"]} flex justify-center gap-6`}>
+          <button type="button" className="button-common button-border-type button-icon-type button-back">
+            <Image src={iconToList} alt="목록으로 가기 버튼 아이콘" width={0} height={0} sizes="100vw" />
             <span>목록으로</span>
           </button>
-          <button type='button' className='button-common button-border-type button-icon-type button-edit'>
-            <Image src={iconEdit} alt='수정하기 버튼 아이콘'  width={0} height={0} sizes="100vw"/>
+          <button type="button" className="button-common button-border-type button-icon-type button-edit">
+            <Image src={iconEdit} alt="수정하기 버튼 아이콘"  width={0} height={0} sizes="100vw"/>
             <span>수정하기</span>
           </button>
         </div>
       </div>
+      </>
   );
 };
 
