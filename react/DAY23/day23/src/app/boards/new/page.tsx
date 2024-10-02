@@ -5,7 +5,7 @@ import { ChangeEvent, useState } from "react";
 import styles from "./styles.module.css"
 import iconPlus from "@/assets/icon_plus.svg";
 import { gql, useMutation } from "@apollo/client";
-import { useParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 const CREATE_BOARD = gql`
   mutation createBoard($createBoardInput: CreateBoardInput!) {

@@ -46,22 +46,24 @@ const BoardsDetail = () => {
     variables: { boardId: id },
   });
 
-  console.log(data?.fetchBoard)
+
+  // const sentences = data?.fetchBoard.contents.split('/\r\n|[\r\n]/')
+  const formattedDate = data?.fetchBoard.createdAt.substring(0, 10).replaceAll('-', '.');
 
 
   return (
     <>
       <div className={styles["app-detail"]}>
         <div className={`${styles["detail-header"]} border-b`}> 
-          <h2>제목</h2>
+          <h2>{data?.fetchBoard.title}</h2>
           <div className={`${styles["detail-header-info"]} flex`}>
             <div className={`${styles["info-writer"]} flex align-center`}>
               <div className={styles["writer-image"]}>
                 <Image src={writerImage} alt="작성자 프로필 이미지" width={0} height={0} sizes="100vw"/>
               </div>
-              <span className={styles["writer-name"]}>홍길동</span>
+              <span className={styles["writer-name"]}>{data?.fetchBoard.writer}</span>
             </div>
-            <div className={styles["info-date"]}>2024.11.11</div>
+            <div className={styles["info-date"]}>{formattedDate}</div>
           </div>
         </div>
         <section className={styles["detail-content"]}>
@@ -70,41 +72,25 @@ const BoardsDetail = () => {
             <Image src={addressEntered} alt="주소 입력됨"  width={0} height={0} sizes="100vw" />
           </div>
           <div className={styles.contents}>
-            <Image src={detailImage} alt="게시물 이미지" className={styles["contents-cover"]} width={0} height={0} sizes="100vw" />
-            <p className={styles["contents-text"]}>
-              살겠노라 살겠노라. 청산에 살겠노라. 
-              머루랑 다래를 먹고 청산에 살겠노라. 
-              얄리얄리 얄랑셩 얄라리 얄라 우는구나 우는구나 새야. 
-              자고 일어나 우는구나 새야. 너보다 시름 많은 나도 자고 일어나
-              우노라. 얄리얄리 얄라셩 얄라리 얄라 갈던 밭(사래) 갈던 밭 보았느냐. 
-              물 아래(근처) 갈던 밭 보았느냐 이끼 묻은 쟁기를 가지고 물 아래 갈던 밭 보았느냐. 
-              얄리얄리 얄라셩 얄라리 얄라 이럭저럭
-              하여 낮일랑 지내 왔건만 올 이도 갈 이도 없는 밤일랑 또 어찌 할 것인가. 
-              얄리얄리 얄라셩 얄라리 얄라 어디다 던지는 돌인가 누구를 맞히려던 돌인가. 
-              미워할 이도 사랑할 이도 없이 맞아서 우노라. 
-              얄리얄리 얄라셩 얄라리 얄라 살겠노라 살겠노라. 바다에 살겠노라. 
-              나문재, 굴, 조개를 먹고 바다에 살겠노라. 
-              얄리얄리 얄라셩 얄라리 얄라 가다가 가다가 듣노라. 에정지(미상) 가다가
-              듣노라. 
-              사슴(탈 쓴 광대)이 솟대에 올라서 해금을 켜는 것을 듣노라. 얄리얄리 얄라셩 얄라리 얄라 가다 보니 배불룩한 술독에 독한 술을 빚는구나. 조롱박꽃 모양 누룩이 매워 (나를) 붙잡으니 내
-              어찌 하리이까.
-              얄리얄리 얄라셩 얄라리 얄라
-            </p>
+            <div className={styles["contents-cover"]}>
+            {data?.fetchBoard?.images[0] !== '' ? data?.fetchBoard?.images.map((el: string, index: number) => (<Image key={index} src={el} alt="게시물 이미지" className={styles["contents-cover-item"]} width={0} height={0} sizes="100vw" />)) : "" }
+            </div>
+            <p className={styles["contents-text"]}>{data?.fetchBoard.contents}</p>
             <div className={styles["contents-video"]}>
-              <Image src={thumbnailYoutube} alt="유튜브 썸네일" width={0} height={0} sizes="100vw" />
+              {data?.fetchBoard.youtubeUrl && <video src={data.fetchBoard.youtubeUrl}></video>}
             </div>
             <div className={`${styles["contents-action"]} flex`}>
               <div className={`${styles["action-dislike"]} flex col`}>
                 <button type="button">
                   <Image src={iconDislike} alt="싫어요 버튼"  width={0} height={0} sizes="100vw"/>
                 </button>
-                <span>24</span>
+                <span>{data?.fetchBoard.dislikeCount}</span>
               </div>
               <div className={`${styles["action-like"]} flex col`}>
                 <button type="button">
                   <Image src={iconLike} alt="좋아요 버튼"  width={0} height={0} sizes="100vw"/>
                 </button>
-                <span className={styles["like-count"]}>12</span>
+                <span className={styles["like-count"]}>{data?.fetchBoard.likeCount}</span>
               </div>
             </div>
           </div>

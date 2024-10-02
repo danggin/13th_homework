@@ -66,12 +66,10 @@
 
 .contents-video {
     width: 100%;
-    height: 512px;
     display: flex;
     justify-content: center;
     align-items: center;
     padding-bottom: 0 !important;
-    background-color: var(--gray-50);
 }
 
 .contents-action {
