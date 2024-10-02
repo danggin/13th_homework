@@ -1,0 +1,51 @@
+
+
+/* Components */
+
+.app-register {
+  font-size: 1.6rem;
+  font-weight: var(--weight-medium);
+}
+
+.register-form > div {
+  padding-top: var(--gap);
+}
+
+.form-title {
+  font-size: 2rem;
+  font-weight: var(--weight-bold);
+}
+
+.register-form input[type='text'],
+.register-form input[type='password'],
+.register-form textarea {
+  max-width: 100%;
+  min-height: 48px;
+  padding: var(--gap-12) var(--gap-16);
+  border: 1px solid var(--gray-200);
+  border-radius: 12px;
+}
+
+.register-form textarea {
+  min-height: 336px;
+}
+
+.app input::placeholder, 
+.app textarea::placeholder {
+  font-size: 1.6rem;
+  font-weight: var(--weight-regular);
+  color: var(--gray-400);
+}
+
+.button-upload {
+  width: 16rem;
+  height: 16rem;
+  justify-content: center;
+  align-items: center;
+  gap: var(--gap-16);
+  color: var(--gray-600);
+  background-color: var(--gray-50);
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: var(--weight-medium);
+}
