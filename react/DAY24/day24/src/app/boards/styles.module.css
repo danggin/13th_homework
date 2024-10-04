@@ -1,0 +1,32 @@
+
+.app-list {
+    width: 100%;
+    padding: 4.8rem var(--gap-24);
+    border-radius: var(--radius-16);
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1);
+    font-size: 1.6rem;
+    text-align: left;
+}
+
+.list-header {
+    padding: var(--gap-16) var(--gap-24);
+    font-weight: var(--weight-medium);
+}
+
+.list-header,
+.list-item {
+    width: 100%;
+}
+
+.item.small {
+    min-width: 40px;
+    max-width: 50px;
+}
+
+.item.medium {
+
+}
+
+.item.large {
+    flex-grow: 1;
+}
