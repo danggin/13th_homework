@@ -29,10 +29,10 @@ export default function BoardsListPage() {
         <div className={styles["app-list"]}>
             <div className={`flex gap-2 ${styles["list-header"]}`}>
                 <h4 className={`${styles["item"]} ${styles["small"]}`}>번호</h4>
-                <h4 className={`${styles["item"]} grow`}>제목</h4>
-                <h4 className={`${styles["item"]} ${styles["small"]}`}>작성자</h4>
-                <h4 className={`${styles["item"]} ${styles["medium"]}`}>날짜</h4>
-                <h4 className={`${styles["item"]} ${styles["small"]} hidden`}>삭제</h4>
+                <h4 className={`${styles["item"]} ${styles["large"]}`}>제목</h4>
+                <h4 className={`${styles["item"]} ${styles["medium"]}`}>작성자</h4>
+                <h4 className={`${styles["item"]} ${styles["medium"]} text-center`}>날짜</h4>
+                <h4 className={`${styles["item"]} ${styles["small"]} invisible`}>삭제</h4>
             </div>
             <div className={styles["list-items"]}>
                 {data?.fetchBoards.map((el:iFetchBoards, index: number) => (
@@ -41,11 +41,11 @@ export default function BoardsListPage() {
                     className={`flex gap-2 ${styles["list-item"]}`}
                     onMouseEnter={() => setHoverIndex(el._id)}
                     onMouseLeave={() => setHoverIndex("")}>
-                        <span className={`${styles["item"]} ${styles["small"]}`}>{index + 1}</span>
-                        <span className={`${styles["item"]} grow`}>{el.title}</span>
-                        <span className={`${styles["item"]} ${styles["small"]}`}>{el.writer}</span>
-                        <span className={`${styles["item"]} ${styles["medium"]}`}>{el.createdAt.substring(0, 10).replaceAll('-', '.')}</span>
-                        <span className={`${hoverIndex === el._id ? "block" : "hidden"} item small`}>
+                        <span className={`${styles["item"]} ${styles["small"]} ${styles["gray"]}`}>{index + 1}</span>
+                        <span className={`${styles["item"]} ${styles["large"]}`}>{el.title}</span>
+                        <span className={`${styles["item"]} ${styles["medium"]}`}>{el.writer}</span>
+                        <span className={`${styles["item"]} ${styles["medium"]} ${styles["gray"]}`}>{el.createdAt.substring(0, 10).replaceAll('-', '.')}</span>
+                        <span className={`${hoverIndex === el._id ? "visible" : "invisible"} ${styles["item"]} ${styles["small"]} pl-6`}>
                             <Image src={iconDelete} height={0} width={0} sizes="100vw" alt="삭제 버튼 아이콘" />
                         </span>
                     </button>
