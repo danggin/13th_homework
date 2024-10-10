@@ -1,12 +1,13 @@
-'use client'
+'use client';
 
-import { useState } from "react"
 import Image from "next/image"
+import gql from "graphql-tag"
+import { useState, MouseEvent } from "react"
+import { useQuery } from "@apollo/client"
+import { useRouter } from "next/navigation"
+import { iFetchBoards } from "@/commons/types/types"
 import styles from "./styles.module.css"
 import iconDelete from '@/assets/icon_delete.svg'
-import gql from "graphql-tag"
-import { useQuery } from "@apollo/client"
-import { iFetchBoards } from "@/commons/types/types"
 
 const FETCH_BOARDS = gql`
 query {
@@ -21,8 +22,17 @@ query {
 `
 
 export default function BoardsListPage() {
+    const router = useRouter();
     const [hoverIndex, setHoverIndex] = useState("");
     const { data } = useQuery(FETCH_BOARDS);
+
+    const handleClick = (
+        event: MouseEvent<HTMLButtonElement>,
+        id: String) => {
+            event.stopPropagation();
+
+        router.push(`./boards/${id}`);
+    }
 
   return (
     <>
@@ -40,7 +50,8 @@ export default function BoardsListPage() {
                     key={el._id}
                     className={`flex gap-2 ${styles["list-item"]}`}
                     onMouseEnter={() => setHoverIndex(el._id)}
-                    onMouseLeave={() => setHoverIndex("")}>
+                    onMouseLeave={() => setHoverIndex("")}
+                    onClick={event => handleClick(event, el?._id)}>
                         <span className={`${styles["item"]} ${styles["small"]} ${styles["gray"]}`}>{index + 1}</span>
                         <span className={`${styles["item"]} ${styles["large"]}`}>{el.title}</span>
                         <span className={`${styles["item"]} ${styles["medium"]}`}>{el.writer}</span>
@@ -50,7 +61,6 @@ export default function BoardsListPage() {
                         </span>
                     </button>
                 ))}
-                
             </div>
         </div>
     </>
