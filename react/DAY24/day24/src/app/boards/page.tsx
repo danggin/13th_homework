@@ -3,7 +3,7 @@
 import Image from "next/image"
 import gql from "graphql-tag"
 import { useState, MouseEvent } from "react"
-import { useQuery } from "@apollo/client"
+import { useMutation, useQuery } from "@apollo/client"
 import { useRouter } from "next/navigation"
 import { iFetchBoards } from "@/commons/types/types"
 import styles from "./styles.module.css"
@@ -18,21 +18,41 @@ query {
         title
         contents
     }
-}
-`
+}`
+
+const DELETE_BOARD = gql`
+  mutation deleteBoard($boardId: ID!) {
+    deleteBoard(boardId: $boardId)
+  }
+`;
 
 export default function BoardsListPage() {
     const router = useRouter();
     const [hoverIndex, setHoverIndex] = useState("");
     const { data } = useQuery(FETCH_BOARDS);
+    const [deleteBoard] = useMutation(DELETE_BOARD)
 
-    const handleClick = (
+    const handleClickDetail = (
         event: MouseEvent<HTMLButtonElement>,
         id: String) => {
             event.stopPropagation();
 
         router.push(`./boards/${id}`);
     }
+
+    const handleClickDelete = async (event: MouseEvent<HTMLButtonElement>) => {
+        event.stopPropagation();
+
+        try {
+          const response = await deleteBoard({
+            variables: { boardId: hoverIndex },
+            refetchQueries: [{ query: FETCH_BOARDS }],
+          });
+          alert("게시글을 삭제했습니다.");
+        } catch (err) {
+          console.error("삭제에 실패했습니다:", err);
+        }
+      };
 
   return (
     <>
@@ -51,12 +71,14 @@ export default function BoardsListPage() {
                     className={`flex gap-2 ${styles["list-item"]}`}
                     onMouseEnter={() => setHoverIndex(el._id)}
                     onMouseLeave={() => setHoverIndex("")}
-                    onClick={event => handleClick(event, el?._id)}>
+                    onClick={event => handleClickDetail(event, el?._id)}>
                         <span className={`${styles["item"]} ${styles["small"]} ${styles["gray"]}`}>{index + 1}</span>
                         <span className={`${styles["item"]} ${styles["large"]}`}>{el.title}</span>
                         <span className={`${styles["item"]} ${styles["medium"]}`}>{el.writer}</span>
                         <span className={`${styles["item"]} ${styles["medium"]} ${styles["gray"]}`}>{el.createdAt.substring(0, 10).replaceAll('-', '.')}</span>
-                        <span className={`${hoverIndex === el._id ? "visible" : "invisible"} ${styles["item"]} ${styles["small"]} pl-6`}>
+                        <span 
+                        className={`${hoverIndex === el._id ? "visible" : "invisible"} ${styles["item"]} ${styles["small"]} pl-6`}
+                        onClick={handleClickDelete}>
                             <Image src={iconDelete} height={0} width={0} sizes="100vw" alt="삭제 버튼 아이콘" />
                         </span>
                     </button>
