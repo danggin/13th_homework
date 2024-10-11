@@ -3,12 +3,12 @@
 import BoardsWrite from "@/components/boards-write";
 
 
-const BoardsNew = () => {
+const BoardsEdit = () => {
   return (
     <>
-      <BoardsWrite isEdit={false} />
+      <BoardsWrite isEdit={true} />
     </>
   )
 };
 
-export default BoardsNew;
+export default BoardsEdit;
