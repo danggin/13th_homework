@@ -1,15 +1,13 @@
 "use client"
 
 import Image from "next/image"
-import { useParams } from "next/navigation"
+import { useParams, useRouter } from "next/navigation"
 import { gql, useQuery } from "@apollo/client"
 import styles from "./styles.module.css"
 
 import writerImage from "@/assets/icon_user.svg"
 import fileAttached from "@/assets/icon_file.svg"
 import addressEntered from "@/assets/icon_location.svg"
-import detailImage from "@/assets/image_detail.png"
-import thumbnailYoutube from "@/assets/thumbnail_video.png"
 import iconDislike from "@/assets/icon_dislike.svg"
 import iconLike from "@/assets/icon_like.svg"
 import iconToList from "@/assets/icon_list.svg"
@@ -40,6 +38,7 @@ const FETCH_BOARD = gql`
 `
 
 const BoardsDetail = () => {
+  const router = useRouter();
   const params = useParams();
   const id = params.boardId;
   const { data } = useQuery(FETCH_BOARD, {
@@ -47,8 +46,15 @@ const BoardsDetail = () => {
   });
 
 
-  // const sentences = data?.fetchBoard.contents.split('/\r\n|[\r\n]/')
   const formattedDate = data?.fetchBoard.createdAt.substring(0, 10).replaceAll('-', '.');
+
+  const onClickEdit = () => {
+    router.push(`./${id}/edit`)
+  }
+
+  const onClickList = () => {
+    router.push('./')
+  }
 
 
   return (
@@ -96,11 +102,17 @@ const BoardsDetail = () => {
           </div>
         </section>
         <div className={`${styles["detail-buttons"]} flex justify-center gap-6`}>
-          <button type="button" className="button-common button-border-type button-icon-type button-back">
+          <button 
+          type="button" 
+          onClick={onClickList}
+          className="button-common button-border-type button-icon-type button-back">
             <Image src={iconToList} alt="목록으로 가기 버튼 아이콘" width={0} height={0} sizes="100vw" />
             <span>목록으로</span>
           </button>
-          <button type="button" className="button-common button-border-type button-icon-type button-edit">
+          <button 
+          type="button" 
+          onClick={onClickEdit}
+          className="button-common button-border-type button-icon-type button-edit">
             <Image src={iconEdit} alt="수정하기 버튼 아이콘"  width={0} height={0} sizes="100vw"/>
             <span>수정하기</span>
           </button>
