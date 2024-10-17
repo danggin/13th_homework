@@ -1,58 +1,13 @@
 "use client"
 
 import Image from "next/image";
-import { ChangeEvent, useState } from "react";
-import { useParams, useRouter } from "next/navigation";
-import { gql, useMutation, useQuery } from "@apollo/client";
-
 import styles from "./styles.module.css"
 import iconPlus from "@/assets/icon_plus.svg";
+import { ChangeEvent, useState } from "react";
+import { useParams, useRouter } from "next/navigation";
+import { useMutation, useQuery } from "@apollo/client";
+import { CREATE_BOARD, FETCH_BOARD } from "./queries";
 
-const CREATE_BOARD = gql`
-  mutation createBoard($createBoardInput: CreateBoardInput!) {
-    createBoard(createBoardInput: $createBoardInput) {
-      _id
-      writer
-      title
-      contents
-      youtubeUrl
-      likeCount
-      images
-      boardAddress {
-        zipcode
-        address
-        addressDetail
-      }
-      createdAt
-      updatedAt
-      deletedAt
-    }
-  }
-`
-
-
-const FETCH_BOARD = gql`
-  query fetchBoard($boardId: ID!) {
-    fetchBoard(boardId: $boardId) {
-      _id
-      writer
-      user {
-        _id
-        name
-        picture
-      }
-      createdAt
-      updatedAt
-      deletedAt
-      title
-      contents
-      images
-      youtubeUrl
-      likeCount
-      dislikeCount
-    }
-  }
-`
 
 
 export default function BoardsWrite({isEdit}: {isEdit: boolean}){
@@ -69,54 +24,32 @@ export default function BoardsWrite({isEdit}: {isEdit: boolean}){
     const [writer, setWriter] = useState("");
     const [password, setPassword] = useState("");
     const [title, setTitle] = useState(isEdit ? data?.fetchBoard?.title : "");
-    const [contents, setContents] = useState(isEdit ? data?.fetchBoard?.contents : "");
-    const [isActive, setIsActive] = useState(false);
+    const [content, setContent] = useState(isEdit ? data?.fetchBoard?.contents : "");
   
     const [errorWriter, setErrorWriter] = useState("");
     const [errorPassword, setErrorPassword] = useState("");
     const [errorTitle, setErrorTitle] = useState("");
-    const [errorContent, setErrorContents] = useState("");
+    const [errorContent, setErrorContent] = useState("");
+
+    const isButtonActive = !writer || !password || !title || !content;
+
   
-    const onChangeWriter = (event: ChangeEvent<HTMLInputElement>) => {
-      const value = event.target.value;
-      setWriter(value);
-  
-      if (event.target.value && password && title && contents) return setIsActive(true);
-      setIsActive(false);
-    };
-    const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
-      const value = event.target.value;
-      setPassword(value);
-  
-      if (writer && event.target.value && title && contents) return setIsActive(true);
-      setIsActive(false);
-    };
-    const onChangeTitle = (event: ChangeEvent<HTMLInputElement>) => {
-      const value = event.target.value;
-      setTitle(value);
-  
-      if (writer && password && event.target.value && contents) return setIsActive(true);
-      setIsActive(false);
-    };
-  
-    const onChangeContent = (event: ChangeEvent<HTMLTextAreaElement>) => {
-      const value = event.target.value;
-      setContents(value);
-  
-      if (writer && password && title && event.target.value) return setIsActive(true);
-      setIsActive(false);
-    };
+    const onChangeWriter = (event: ChangeEvent<HTMLInputElement>) => setWriter(event.target.value);
+    const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => setPassword(event.target.value);
+    const onChangeTitle = (event: ChangeEvent<HTMLInputElement>) => setTitle(event.target.value);
+    const onChangeContent = (event: ChangeEvent<HTMLTextAreaElement>) => setContent(event.target.value);
+
+    console.log(writer, password, title, content)
+
   
     const onClickRegister = async () => {
-  
-      const isValid = writer.trim() === "" || password.trim() === "" || title.trim() === "" || content.trim() === "";
-  
+
       !writer ? setErrorWriter("필수입력 사항입니다.") : setErrorWriter("");
       !password ? setErrorPassword("필수입력 사항입니다.") : setErrorPassword("");
       !title ? setErrorTitle("필수입력 사항입니다.") : setErrorTitle("");
-      !contents ? setErrorContents("필수입력 사항입니다.") : setErrorContents("");
+      !content ? setErrorContent("필수입력 사항입니다.") : setErrorContent("");
   
-      if (!isValid) {
+      if (!isButtonActive) {
         try {
           const { data } = await createBoard({
             variables: {
@@ -124,7 +57,7 @@ export default function BoardsWrite({isEdit}: {isEdit: boolean}){
                 writer: writer,
                 password: password,
                 title: title,
-                contents: contents,
+                contents: content,
                 youtubeUrl: "",
                 boardAddress: {
                   zipcode: "",
@@ -210,7 +143,7 @@ export default function BoardsWrite({isEdit}: {isEdit: boolean}){
               <button type="button" className="button-common button-border-type">
                 취소
               </button>
-              <button type="button" onClick={onClickRegister} className={`button-common button-fill-type ${isActive ? "bg-blue" : "bg-gray disabled"}`}>
+              <button type="button" onClick={onClickRegister} className="button-common button-fill-type" disabled={isButtonActive}>
               {isEdit ? "수정" : "등록"}하기
               </button>
             </div>
