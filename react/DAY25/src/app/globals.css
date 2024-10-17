@@ -118,12 +118,12 @@
   cursor: not-allowed;
 }
 
-.button-fill-type.bg-gray {
+.button-fill-type:disabled {
   color: var(--gray-100);
   background-color: var(--gray-300);
 }
 
-.button-fill-type.bg-blue {
+.button-fill-type {
   color: var(--gray-w);
   background-color: var(--accent-blue);
 }
